@@ -62,7 +62,7 @@ module "dbnl" {
   db_password           = random_string.db_password.id
   dev_token_private_key = tls_private_key.dev.private_key_pem
   domain                = var.domain
-  helm_chart_version    = "0.0.37"
+  helm_chart_version    = "0.23.4"
   instance_size         = "small"
   oidc_audience         = var.oidc_audience
   oidc_issuer           = var.oidc_issuer
