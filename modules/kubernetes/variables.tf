@@ -37,7 +37,7 @@ variable "kubernetes_control_plane_cidr" {
 variable "gke_version" {
   type        = string
   description = "GKE version"
-  default     = "1.29"
+  default     = "latest"
 }
 
 variable "desired_size" {
