@@ -26,7 +26,7 @@ No requirements.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_desired_size"></a> [desired\_size](#input\_desired\_size) | Desired size of GKE cluster | `number` | `1` | no |
-| <a name="input_gke_version"></a> [gke\_version](#input\_gke\_version) | GKE version | `string` | `"1.29"` | no |
+| <a name="input_gke_version"></a> [gke\_version](#input\_gke\_version) | GKE version | `string` | `"latest"` | no |
 | <a name="input_instance_type"></a> [instance\_type](#input\_instance\_type) | Kubernetes node instance type | `string` | n/a | yes |
 | <a name="input_kubernetes_control_plane_cidr"></a> [kubernetes\_control\_plane\_cidr](#input\_kubernetes\_control\_plane\_cidr) | private IP block for GKE. | `string` | `"10.0.3.0/28"` | no |
 | <a name="input_network_name"></a> [network\_name](#input\_network\_name) | Name of the VPC network | `string` | n/a | yes |
