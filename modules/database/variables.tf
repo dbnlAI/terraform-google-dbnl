@@ -38,11 +38,13 @@ variable "username" {
   description = "Username for the database"
   type        = string
   default     = "basic_user"
+  sensitive   = true
 }
 
 variable "password" {
   description = "Password for the database"
   type        = string
+  sensitive   = true
 }
 
 variable "terraform_deletion_protection" {

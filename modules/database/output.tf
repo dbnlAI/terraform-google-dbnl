@@ -17,9 +17,11 @@ output "database_name" {
 output "username" {
   description = "The username for the database"
   value       = var.username
+  sensitive   = true
 }
 
 output "password" {
   description = "The password for the database"
   value       = var.password
+  sensitive   = true
 }
