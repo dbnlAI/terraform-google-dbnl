@@ -64,6 +64,7 @@ No modules.
 | <a name="input_registry_server"></a> [registry\_server](#input\_registry\_server) | Image registry server. | `string` | `"us-docker.pkg.dev/dbnlai"` | no |
 | <a name="input_registry_username"></a> [registry\_username](#input\_registry\_username) | Image registry username. | `string` | n/a | yes |
 | <a name="input_static_ip_name"></a> [static\_ip\_name](#input\_static\_ip\_name) | GCP _name_ of static IP reserved for ingress. | `string` | n/a | yes |
+| <a name="input_terms_of_service_disabled"></a> [terms\_of\_service\_disabled](#input\_terms\_of\_service\_disabled) | Whether to disable the terms of service acceptance requirement. | `bool` | `false` | no |
 
 ## Outputs
 

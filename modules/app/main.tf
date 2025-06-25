@@ -110,6 +110,9 @@ locals {
         enabled = false
       }
     }
+    tos = {
+      disabled = var.terms_of_service_disabled
+    }
   }
 }
 
