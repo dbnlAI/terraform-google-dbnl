@@ -180,3 +180,9 @@ variable "vpc_cidr" {
   description = "VPC CIDR."
   default     = "192.168.0.0/16"
 }
+
+variable "terms_of_service_disabled" {
+  type        = bool
+  description = "Whether to disable the terms of service acceptance requirement."
+  default     = false
+}

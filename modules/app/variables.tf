@@ -211,3 +211,9 @@ variable "redis_server_ca_certs" {
   type        = string
   description = "Redis server CA certs."
 }
+
+variable "terms_of_service_disabled" {
+  type        = bool
+  description = "Whether to disable the terms of service acceptance requirement."
+  default     = false
+}

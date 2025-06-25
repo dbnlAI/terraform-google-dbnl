@@ -61,12 +61,13 @@ module "app" {
   gcs_region = module.blobstore.gcs_region
 
   # App Authentication
-  admin_password        = var.admin_password
-  dev_token_private_key = var.dev_token_private_key
-  oidc_audience         = var.oidc_audience
-  oidc_client_id        = var.oidc_client_id
-  oidc_issuer           = var.oidc_issuer
-  oidc_scopes           = var.oidc_scopes
+  admin_password            = var.admin_password
+  dev_token_private_key     = var.dev_token_private_key
+  oidc_audience             = var.oidc_audience
+  oidc_client_id            = var.oidc_client_id
+  oidc_issuer               = var.oidc_issuer
+  oidc_scopes               = var.oidc_scopes
+  terms_of_service_disabled = var.terms_of_service_disabled
 
   # (optional) Flower monitoring
   flower_enabled             = var.flower_enabled
