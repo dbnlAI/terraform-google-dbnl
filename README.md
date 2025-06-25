@@ -17,7 +17,7 @@ Terraform modules to deploy dbnl in GCP
 
 | Name | Version |
 |------|---------|
-| <a name="provider_google"></a> [google](#provider\_google) | ~> 5.30 |
+| <a name="provider_google"></a> [google](#provider\_google) | 5.35.0 |
 
 ## Modules
 
@@ -66,6 +66,7 @@ Terraform modules to deploy dbnl in GCP
 | <a name="input_registry_password"></a> [registry\_password](#input\_registry\_password) | Image registry password. | `string` | n/a | yes |
 | <a name="input_registry_server"></a> [registry\_server](#input\_registry\_server) | Image registry server. | `string` | `"us-docker.pkg.dev/dbnlai"` | no |
 | <a name="input_registry_username"></a> [registry\_username](#input\_registry\_username) | Image registry username. | `string` | `"_json_key_base64"` | no |
+| <a name="input_terms_of_service_disabled"></a> [terms\_of\_service\_disabled](#input\_terms\_of\_service\_disabled) | Whether to disable the terms of service acceptance requirement. | `bool` | `false` | no |
 | <a name="input_terraform_deletion_protection"></a> [terraform\_deletion\_protection](#input\_terraform\_deletion\_protection) | Whether or not terraform can delete resources such as database and kubernetes cluster. If set to true, terraform will not be able to delete or replace these resources. | `bool` | `false` | no |
 | <a name="input_tls_cert"></a> [tls\_cert](#input\_tls\_cert) | TLS certificate, if providing your own. Will be stored as Kubernetes secret. | `string` | `null` | no |
 | <a name="input_tls_key"></a> [tls\_key](#input\_tls\_key) | TLS key, if providing your own. Will be stored as Kubernetes secret. | `string` | `null` | no |
