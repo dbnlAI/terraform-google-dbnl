@@ -54,8 +54,8 @@ Terraform modules to deploy dbnl in GCP
 | <a name="input_helm_release_name"></a> [helm\_release\_name](#input\_helm\_release\_name) | Helm Release name. | `string` | `"dbnl"` | no |
 | <a name="input_helm_release_namespace"></a> [helm\_release\_namespace](#input\_helm\_release\_namespace) | Namespace for helm release. | `string` | `"default"` | no |
 | <a name="input_helm_repository_password"></a> [helm\_repository\_password](#input\_helm\_repository\_password) | Password for accessing helm chart repository. If unset, defaults to `registry_password` | `string` | `null` | no |
-| <a name="input_helm_repository_url"></a> [helm\_repository\_url](#input\_helm\_repository\_url) | URL for accessing helm chart repository. | `string` | `"oci://us-docker.pkg.dev/dbnlai/dbnl"` | no |
-| <a name="input_helm_repository_username"></a> [helm\_repository\_username](#input\_helm\_repository\_username) | Username for accessing helm chart repository. | `string` | `"_json_key_base64"` | no |
+| <a name="input_helm_repository_url"></a> [helm\_repository\_url](#input\_helm\_repository\_url) | URL for accessing helm chart repository. | `string` | `"oci://ghcr.io/dbnlai/charts/dbnl"` | no |
+| <a name="input_helm_repository_username"></a> [helm\_repository\_username](#input\_helm\_repository\_username) | Username for accessing helm chart repository. | `string` | `null` | no |
 | <a name="input_instance_size"></a> [instance\_size](#input\_instance\_size) | App instance size. | `string` | n/a | yes |
 | <a name="input_oidc_audience"></a> [oidc\_audience](#input\_oidc\_audience) | OIDC audience. Mutually exclusive with admin\_password. | `string` | `null` | no |
 | <a name="input_oidc_client_id"></a> [oidc\_client\_id](#input\_oidc\_client\_id) | OIDC client id. Mutually exclusive with admin\_password. | `string` | `null` | no |
@@ -63,9 +63,9 @@ Terraform modules to deploy dbnl in GCP
 | <a name="input_oidc_scopes"></a> [oidc\_scopes](#input\_oidc\_scopes) | OIDC scopes. Space-separated string. Mutually exclusive with admin\_password. | `string` | `"openid email profile"` | no |
 | <a name="input_prefix"></a> [prefix](#input\_prefix) | Name prefix to apply to resources. | `string` | n/a | yes |
 | <a name="input_public_facing"></a> [public\_facing](#input\_public\_facing) | Whether the app is public facing. | `bool` | `false` | no |
-| <a name="input_registry_password"></a> [registry\_password](#input\_registry\_password) | Image registry password. | `string` | n/a | yes |
-| <a name="input_registry_server"></a> [registry\_server](#input\_registry\_server) | Image registry server. | `string` | `"us-docker.pkg.dev/dbnlai"` | no |
-| <a name="input_registry_username"></a> [registry\_username](#input\_registry\_username) | Image registry username. | `string` | `"_json_key_base64"` | no |
+| <a name="input_registry_password"></a> [registry\_password](#input\_registry\_password) | Image registry password. | `string` | `null` | no |
+| <a name="input_registry_server"></a> [registry\_server](#input\_registry\_server) | Image registry server. | `string` | `"ghcr.io/dbnlai"` | no |
+| <a name="input_registry_username"></a> [registry\_username](#input\_registry\_username) | Image registry username. | `string` | `null` | no |
 | <a name="input_terms_of_service_disabled"></a> [terms\_of\_service\_disabled](#input\_terms\_of\_service\_disabled) | Whether to disable the terms of service acceptance requirement. | `bool` | `false` | no |
 | <a name="input_terraform_deletion_protection"></a> [terraform\_deletion\_protection](#input\_terraform\_deletion\_protection) | Whether or not terraform can delete resources such as database and kubernetes cluster. If set to true, terraform will not be able to delete or replace these resources. | `bool` | `false` | no |
 | <a name="input_tls_cert"></a> [tls\_cert](#input\_tls\_cert) | TLS certificate, if providing your own. Will be stored as Kubernetes secret. | `string` | `null` | no |

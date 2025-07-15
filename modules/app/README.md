@@ -60,9 +60,9 @@ No modules.
 | <a name="input_redis_port"></a> [redis\_port](#input\_redis\_port) | Redis port. | `number` | `6379` | no |
 | <a name="input_redis_server_ca_certs"></a> [redis\_server\_ca\_certs](#input\_redis\_server\_ca\_certs) | Redis server CA certs. | `string` | n/a | yes |
 | <a name="input_redis_username"></a> [redis\_username](#input\_redis\_username) | Redis username. | `string` | `"default"` | no |
-| <a name="input_registry_password"></a> [registry\_password](#input\_registry\_password) | Image registry password. | `string` | n/a | yes |
-| <a name="input_registry_server"></a> [registry\_server](#input\_registry\_server) | Image registry server. | `string` | `"us-docker.pkg.dev/dbnlai"` | no |
-| <a name="input_registry_username"></a> [registry\_username](#input\_registry\_username) | Image registry username. | `string` | n/a | yes |
+| <a name="input_registry_password"></a> [registry\_password](#input\_registry\_password) | Image registry password. | `string` | `null` | no |
+| <a name="input_registry_server"></a> [registry\_server](#input\_registry\_server) | Image registry server. | `string` | `"ghcr.io/dbnlai"` | no |
+| <a name="input_registry_username"></a> [registry\_username](#input\_registry\_username) | Image registry username. | `string` | `null` | no |
 | <a name="input_static_ip_name"></a> [static\_ip\_name](#input\_static\_ip\_name) | GCP _name_ of static IP reserved for ingress. | `string` | n/a | yes |
 | <a name="input_terms_of_service_disabled"></a> [terms\_of\_service\_disabled](#input\_terms\_of\_service\_disabled) | Whether to disable the terms of service acceptance requirement. | `bool` | `false` | no |
 
