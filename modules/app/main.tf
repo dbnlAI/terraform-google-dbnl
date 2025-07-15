@@ -1,8 +1,8 @@
 locals {
   oidc_enabled             = var.oidc_issuer != null && var.oidc_audience != null && var.oidc_client_id != null
   admin_enabled            = nonsensitive(var.admin_password != null)
-  helm_repository_username = coalesce(var.helm_repository_username, var.registry_username)
-  helm_repository_password = coalesce(var.helm_repository_password, var.registry_password)
+  helm_repository_username = try(coalesce(var.helm_repository_username, var.registry_username), null)
+  helm_repository_password = try(coalesce(var.helm_repository_password, var.registry_password), null)
 
   flower_basic_auth_enabled = nonsensitive(var.flower_basic_auth_username != null && var.flower_basic_auth_password != null)
 
@@ -11,7 +11,7 @@ locals {
   values = {
     imagePullSecrets = length(kubernetes_secret.image_pull_secret) > 0 ? [
       {
-        name = kubernetes_secret.image_pull_secret.metadata[0].name
+        name = kubernetes_secret.image_pull_secret[0].metadata[0].name
       }
     ] : []
     api = {

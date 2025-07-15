@@ -16,7 +16,8 @@ locals {
   # NOTE: in GKE, control plane must be /28, so we replace the mask with 28
   kubernete_control_plane_cidr = "${split("/", local.subnet_cidrs[3])[0]}/28"
 
-  helm_repository_password = coalesce(var.helm_repository_password, var.registry_password)
+  helm_repository_username = try(coalesce(var.helm_repository_username, var.registry_username), null)
+  helm_repository_password = try(coalesce(var.helm_repository_password, var.registry_password), null)
 }
 
 module "app" {
@@ -27,7 +28,7 @@ module "app" {
   # Helm chart info
   helm_chart_version       = var.helm_chart_version
   helm_repository_url      = var.helm_repository_url
-  helm_repository_username = var.helm_repository_username
+  helm_repository_username = local.helm_repository_username
   helm_repository_password = local.helm_repository_password
   helm_release_name        = var.helm_release_name
 
