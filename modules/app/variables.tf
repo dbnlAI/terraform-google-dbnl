@@ -182,19 +182,21 @@ variable "redis_username" {
 variable "registry_server" {
   type        = string
   description = "Image registry server."
-  default     = "us-docker.pkg.dev/dbnlai"
+  default     = "ghcr.io/dbnlai"
 }
 
 variable "registry_username" {
   type        = string
   description = "Image registry username."
   sensitive   = true
+  default     = null
 }
 
 variable "registry_password" {
   type        = string
   description = "Image registry password."
   sensitive   = true
+  default     = null
 }
 
 variable "static_ip_name" {

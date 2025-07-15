@@ -33,9 +33,3 @@ variable "oidc_scopes" {
   description = "OIDC scopes. Space-separated string."
   default     = "openid email profile"
 }
-
-variable "registry_password" {
-  type        = string
-  description = "Artifact / container registry password."
-  sensitive   = true
-}

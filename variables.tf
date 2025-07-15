@@ -75,8 +75,8 @@ variable "helm_release_namespace" {
 variable "helm_repository_username" {
   type        = string
   description = "Username for accessing helm chart repository."
-  default     = "_json_key_base64"
   sensitive   = true
+  default     = null
 }
 
 variable "helm_repository_password" {
@@ -89,7 +89,7 @@ variable "helm_repository_password" {
 variable "helm_repository_url" {
   type        = string
   description = "URL for accessing helm chart repository."
-  default     = "oci://us-docker.pkg.dev/dbnlai/dbnl"
+  default     = "oci://ghcr.io/dbnlai/charts/dbnl"
 }
 
 variable "instance_size" {
@@ -140,19 +140,21 @@ variable "public_facing" {
 variable "registry_server" {
   type        = string
   description = "Image registry server."
-  default     = "us-docker.pkg.dev/dbnlai"
+  default     = "ghcr.io/dbnlai"
 }
 
 variable "registry_username" {
   type        = string
   description = "Image registry username."
-  default     = "_json_key_base64"
+  sensitive   = true
+  default     = null
 }
 
 variable "registry_password" {
   type        = string
   description = "Image registry password."
   sensitive   = true
+  default     = null
 }
 
 variable "tls_cert" {
