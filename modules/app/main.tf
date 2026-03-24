@@ -15,6 +15,10 @@ locals {
       }
     ] : []
     api = {
+      image = {
+        repository = "${var.registry_server}/images/api-srv"
+        tag        = var.helm_chart_version
+      }
       serviceAccount = {
         annotations = {
           "iam.gke.io/gcp-service-account" = var.gcp_service_account_emails["api"]
@@ -53,9 +57,25 @@ locals {
       host = var.domain
     }
     migration = {
+      image = {
+        repository = "${var.registry_server}/images/migration-job"
+        tag        = var.helm_chart_version
+      }
       serviceAccount = {
         annotations = {
           "iam.gke.io/gcp-service-account" = var.gcp_service_account_emails["migration"]
+        }
+      }
+    }
+    scheduler = {
+      enabled = true
+      image = {
+        repository = "${var.registry_server}/images/scheduler-srv"
+        tag        = var.helm_chart_version
+      }
+      serviceAccount = {
+        annotations = {
+          "iam.gke.io/gcp-service-account" = var.gcp_service_account_emails["scheduler"]
         }
       }
     }
@@ -75,6 +95,13 @@ locals {
       }
     }
     worker = {
+      image = {
+        repository = "${var.registry_server}/images/worker-srv"
+        tag        = var.helm_chart_version
+      }
+      realtime = {
+        enabled = true
+      }
       serviceAccount = {
         annotations = {
           "iam.gke.io/gcp-service-account" = var.gcp_service_account_emails["worker"]
@@ -82,6 +109,10 @@ locals {
       }
     }
     ui = {
+      image = {
+        repository = "${var.registry_server}/images/ui-srv"
+        tag        = var.helm_chart_version
+      }
       serviceAccount = {
         annotations = {
           "iam.gke.io/gcp-service-account" = var.gcp_service_account_emails["ui"]
@@ -90,6 +121,10 @@ locals {
     }
     flower = var.flower_enabled ? {
       enabled = true
+      image = {
+        repository = "${var.registry_server}/images/flower-srv"
+        tag        = var.helm_chart_version
+      }
       serviceAccount = {
         annotations = {
           "iam.gke.io/gcp-service-account" = var.gcp_service_account_emails["flower"]
@@ -101,6 +136,10 @@ locals {
       }
       } : {
       enabled = false
+      image = {
+        repository = "${var.registry_server}/images/flower-srv"
+        tag        = var.helm_chart_version
+      }
       serviceAccount = {
         annotations = {
           "iam.gke.io/gcp-service-account" = ""
@@ -210,7 +249,6 @@ resource "helm_release" "dbnl" {
 
   depends_on = [
     kubernetes_secret.image_pull_secret,
-    var.ingress_cert_name,
     terraform_data.neg_cleanup,
   ]
 }

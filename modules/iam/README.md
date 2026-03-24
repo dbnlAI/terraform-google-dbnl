@@ -17,6 +17,7 @@ No requirements.
 | <a name="module_k8s_to_gcp_api_binding"></a> [k8s\_to\_gcp\_api\_binding](#module\_k8s\_to\_gcp\_api\_binding) | terraform-google-modules/iam/google//modules/service_accounts_iam | n/a |
 | <a name="module_k8s_to_gcp_flower_binding"></a> [k8s\_to\_gcp\_flower\_binding](#module\_k8s\_to\_gcp\_flower\_binding) | terraform-google-modules/iam/google//modules/service_accounts_iam | n/a |
 | <a name="module_k8s_to_gcp_migration_binding"></a> [k8s\_to\_gcp\_migration\_binding](#module\_k8s\_to\_gcp\_migration\_binding) | terraform-google-modules/iam/google//modules/service_accounts_iam | n/a |
+| <a name="module_k8s_to_gcp_scheduler_binding"></a> [k8s\_to\_gcp\_scheduler\_binding](#module\_k8s\_to\_gcp\_scheduler\_binding) | terraform-google-modules/iam/google//modules/service_accounts_iam | n/a |
 | <a name="module_k8s_to_gcp_ui_binding"></a> [k8s\_to\_gcp\_ui\_binding](#module\_k8s\_to\_gcp\_ui\_binding) | terraform-google-modules/iam/google//modules/service_accounts_iam | n/a |
 | <a name="module_k8s_to_gcp_worker_binding"></a> [k8s\_to\_gcp\_worker\_binding](#module\_k8s\_to\_gcp\_worker\_binding) | terraform-google-modules/iam/google//modules/service_accounts_iam | n/a |
 
@@ -29,6 +30,7 @@ No requirements.
 | [google_service_account.api_sa](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/service_account) | resource |
 | [google_service_account.flower_sa](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/service_account) | resource |
 | [google_service_account.migration_sa](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/service_account) | resource |
+| [google_service_account.scheduler_sa](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/service_account) | resource |
 | [google_service_account.ui_sa](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/service_account) | resource |
 | [google_service_account.worker_sa](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/service_account) | resource |
 

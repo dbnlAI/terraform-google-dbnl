@@ -6,6 +6,7 @@ output "gcp_service_account_emails" {
       "migration" = google_service_account.migration_sa.email
       "worker"    = google_service_account.worker_sa.email
       "ui"        = google_service_account.ui_sa.email
+      "scheduler" = google_service_account.scheduler_sa.email
     },
     var.flower_enabled ? {
       "flower" = google_service_account.flower_sa[0].email
