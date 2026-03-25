@@ -14,7 +14,7 @@ No requirements.
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_google_storage_bucket"></a> [google\_storage\_bucket](#module\_google\_storage\_bucket) | terraform-google-modules/cloud-storage/google//modules/simple_bucket | ~> 6.0 |
-| <a name="module_storage_object_access_role"></a> [storage\_object\_access\_role](#module\_storage\_object\_access\_role) | terraform-google-modules/iam/google//modules/custom_role_iam | n/a |
+| <a name="module_storage_object_access_role"></a> [storage\_object\_access\_role](#module\_storage\_object\_access\_role) | terraform-google-modules/iam/google//modules/custom_role_iam | ~> 8.0 |
 
 ## Resources
 
