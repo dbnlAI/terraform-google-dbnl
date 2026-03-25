@@ -89,7 +89,7 @@ variable "helm_repository_password" {
 variable "helm_repository_url" {
   type        = string
   description = "URL for accessing helm chart repository."
-  default     = "oci://ghcr.io/dbnlai/charts/dbnl"
+  default     = "oci://ghcr.io/dbnlai/charts"
 }
 
 variable "instance_size" {
