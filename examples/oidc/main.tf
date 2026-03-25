@@ -63,7 +63,6 @@ module "dbnl" {
   dev_token_private_key = tls_private_key.dev.private_key_pem
   domain                = var.domain
   helm_chart_version    = "0.30.0"
-  registry_password     = var.registry_password
   instance_size         = "small"
   oidc_audience         = var.oidc_audience
   oidc_issuer           = var.oidc_issuer

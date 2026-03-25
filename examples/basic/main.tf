@@ -65,7 +65,6 @@ module "dbnl" {
   domain                = var.domain
   helm_chart_version    = "0.30.0"
   instance_size         = "small"
-  registry_password     = var.registry_password
   prefix                = random_pet.prefix.id
   public_facing         = true
 }
