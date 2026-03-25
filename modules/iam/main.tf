@@ -64,6 +64,7 @@ resource "google_service_account" "scheduler_sa" {
 
 module "bucket_bindings" {
   source          = "terraform-google-modules/iam/google//modules/storage_buckets_iam"
+  version         = "~> 8.0"
   mode            = "authoritative"
   storage_buckets = [var.bucket_name]
 
@@ -77,7 +78,8 @@ module "bucket_bindings" {
 }
 
 module "k8s_to_gcp_api_binding" {
-  source = "terraform-google-modules/iam/google//modules/service_accounts_iam"
+  source  = "terraform-google-modules/iam/google//modules/service_accounts_iam"
+  version = "~> 8.0"
 
   project          = var.project
   mode             = "authoritative"
@@ -96,7 +98,8 @@ module "k8s_to_gcp_api_binding" {
 }
 
 module "k8s_to_gcp_migration_binding" {
-  source = "terraform-google-modules/iam/google//modules/service_accounts_iam"
+  source  = "terraform-google-modules/iam/google//modules/service_accounts_iam"
+  version = "~> 8.0"
 
   project          = var.project
   mode             = "authoritative"
@@ -109,7 +112,8 @@ module "k8s_to_gcp_migration_binding" {
 }
 
 module "k8s_to_gcp_worker_binding" {
-  source = "terraform-google-modules/iam/google//modules/service_accounts_iam"
+  source  = "terraform-google-modules/iam/google//modules/service_accounts_iam"
+  version = "~> 8.0"
 
   project          = var.project
   mode             = "authoritative"
@@ -122,7 +126,8 @@ module "k8s_to_gcp_worker_binding" {
 }
 
 module "k8s_to_gcp_ui_binding" {
-  source = "terraform-google-modules/iam/google//modules/service_accounts_iam"
+  source  = "terraform-google-modules/iam/google//modules/service_accounts_iam"
+  version = "~> 8.0"
 
   project          = var.project
   mode             = "authoritative"
@@ -135,8 +140,9 @@ module "k8s_to_gcp_ui_binding" {
 }
 
 module "k8s_to_gcp_flower_binding" {
-  count  = var.flower_enabled ? 1 : 0
-  source = "terraform-google-modules/iam/google//modules/service_accounts_iam"
+  count   = var.flower_enabled ? 1 : 0
+  source  = "terraform-google-modules/iam/google//modules/service_accounts_iam"
+  version = "~> 8.0"
 
   project          = var.project
   mode             = "authoritative"
@@ -149,7 +155,8 @@ module "k8s_to_gcp_flower_binding" {
 }
 
 module "k8s_to_gcp_scheduler_binding" {
-  source = "terraform-google-modules/iam/google//modules/service_accounts_iam"
+  source  = "terraform-google-modules/iam/google//modules/service_accounts_iam"
+  version = "~> 8.0"
 
   project          = var.project
   mode             = "authoritative"
