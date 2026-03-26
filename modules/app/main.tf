@@ -47,14 +47,25 @@ locals {
       database = var.db_database_name
     }
     ingress = {
-      enabled   = true
-      className = "gce"
-      annotations = {
-        "kubernetes.io/ingress.class"                 = "gce"
-        "kubernetes.io/ingress.global-static-ip-name" = var.static_ip_name
-        "ingress.gcp.kubernetes.io/pre-shared-cert"   = var.ingress_cert_name
+      enabled = true
+      api = {
+        className = "gce"
+        annotations = {
+          "kubernetes.io/ingress.class"                 = "gce"
+          "kubernetes.io/ingress.global-static-ip-name" = var.static_ip_name
+          "ingress.gcp.kubernetes.io/pre-shared-cert"   = var.ingress_cert_name
+        }
+        host = var.domain
       }
-      host = var.domain
+      ui = {
+        className = "gce"
+        annotations = {
+          "kubernetes.io/ingress.class"                 = "gce"
+          "kubernetes.io/ingress.global-static-ip-name" = var.static_ip_name
+          "ingress.gcp.kubernetes.io/pre-shared-cert"   = var.ingress_cert_name
+        }
+        host = var.domain
+      }
     }
     migration = {
       image = {
