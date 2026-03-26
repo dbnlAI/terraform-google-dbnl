@@ -22,7 +22,8 @@ module "google_storage_bucket" {
 }
 
 module "storage_object_access_role" {
-  source = "terraform-google-modules/iam/google//modules/custom_role_iam"
+  source  = "terraform-google-modules/iam/google//modules/custom_role_iam"
+  version = "~> 8.0"
 
   target_level = "project"
   target_id    = var.project

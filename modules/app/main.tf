@@ -15,6 +15,11 @@ locals {
       }
     ] : []
     api = {
+      baseUrl = "https://${var.domain}/api"
+      image = {
+        repository = "${var.registry_server}/images/api-srv"
+        tag        = var.helm_chart_version
+      }
       serviceAccount = {
         annotations = {
           "iam.gke.io/gcp-service-account" = var.gcp_service_account_emails["api"]
@@ -43,19 +48,28 @@ locals {
       database = var.db_database_name
     }
     ingress = {
-      enabled   = true
-      className = "gce"
-      annotations = {
-        "kubernetes.io/ingress.class"                 = "gce"
-        "kubernetes.io/ingress.global-static-ip-name" = var.static_ip_name
-        "ingress.gcp.kubernetes.io/pre-shared-cert"   = var.ingress_cert_name
-      }
-      host = var.domain
+      enabled = false
     }
     migration = {
+      image = {
+        repository = "${var.registry_server}/images/migration-job"
+        tag        = var.helm_chart_version
+      }
       serviceAccount = {
         annotations = {
           "iam.gke.io/gcp-service-account" = var.gcp_service_account_emails["migration"]
+        }
+      }
+    }
+    scheduler = {
+      enabled = true
+      image = {
+        repository = "${var.registry_server}/images/scheduler-srv"
+        tag        = var.helm_chart_version
+      }
+      serviceAccount = {
+        annotations = {
+          "iam.gke.io/gcp-service-account" = var.gcp_service_account_emails["scheduler"]
         }
       }
     }
@@ -75,6 +89,13 @@ locals {
       }
     }
     worker = {
+      image = {
+        repository = "${var.registry_server}/images/worker-srv"
+        tag        = var.helm_chart_version
+      }
+      realtime = {
+        enabled = true
+      }
       serviceAccount = {
         annotations = {
           "iam.gke.io/gcp-service-account" = var.gcp_service_account_emails["worker"]
@@ -82,6 +103,11 @@ locals {
       }
     }
     ui = {
+      baseUrl = "https://${var.domain}"
+      image = {
+        repository = "${var.registry_server}/images/ui-srv"
+        tag        = var.helm_chart_version
+      }
       serviceAccount = {
         annotations = {
           "iam.gke.io/gcp-service-account" = var.gcp_service_account_emails["ui"]
@@ -90,6 +116,10 @@ locals {
     }
     flower = var.flower_enabled ? {
       enabled = true
+      image = {
+        repository = "${var.registry_server}/images/flower-srv"
+        tag        = var.helm_chart_version
+      }
       serviceAccount = {
         annotations = {
           "iam.gke.io/gcp-service-account" = var.gcp_service_account_emails["flower"]
@@ -101,6 +131,10 @@ locals {
       }
       } : {
       enabled = false
+      image = {
+        repository = "${var.registry_server}/images/flower-srv"
+        tag        = var.helm_chart_version
+      }
       serviceAccount = {
         annotations = {
           "iam.gke.io/gcp-service-account" = ""
@@ -210,9 +244,51 @@ resource "helm_release" "dbnl" {
 
   depends_on = [
     kubernetes_secret.image_pull_secret,
-    var.ingress_cert_name,
     terraform_data.neg_cleanup,
   ]
+}
+
+resource "kubernetes_ingress_v1" "dbnl" {
+  metadata {
+    name      = "${var.helm_release_name}-ingress"
+    namespace = var.helm_release_namespace
+    annotations = {
+      "kubernetes.io/ingress.class"                 = "gce"
+      "kubernetes.io/ingress.global-static-ip-name" = var.static_ip_name
+      "ingress.gcp.kubernetes.io/pre-shared-cert"   = var.ingress_cert_name
+    }
+  }
+
+  spec {
+    ingress_class_name = "gce"
+    rule {
+      host = var.domain
+      http {
+        path {
+          path      = "/api"
+          path_type = "Prefix"
+          backend {
+            service {
+              name = "${var.helm_release_name}-api-srv"
+              port { number = 80 }
+            }
+          }
+        }
+        path {
+          path      = "/"
+          path_type = "Prefix"
+          backend {
+            service {
+              name = "${var.helm_release_name}-ui-srv"
+              port { number = 80 }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  depends_on = [helm_release.dbnl]
 }
 
 # NOTE: Helm chart creates ingress which in turn creates a load balancer that puts a NEG in each zone.

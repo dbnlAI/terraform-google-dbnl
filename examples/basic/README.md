@@ -1,17 +1,29 @@
 # Basic deployment
 
-Thiss example shows how to create a basic dbnl deployment to get familiar with the infrastructure and app.
+This example shows how to create a basic dbnl deployment on GCP (GKE) using username/password authentication.
 
 **!!!DO NOT USE THIS EXAMPLE IN PRODUCTION!!!**
 
+## Prerequisites
+
+- [Google Cloud CLI](https://cloud.google.com/sdk/docs/install) installed and authenticated (`gcloud auth login`)
+- `gke-gcloud-auth-plugin` installed (`gcloud components install gke-gcloud-auth-plugin`)
+
+## Required variables
+
+| Variable | Description |
+|---|---|
+| `admin_password` | Password for the dbnl admin user |
+| `domain` | Domain to deploy dbnl to |
+| `gcp_project` | GCP project ID |
+| `gcp_region` | GCP region to deploy into |
+
 ## Usage
 
-  1. Have a Google Cloud account and a project set up
-  2. Have `gcloud` CLI installed and configured, with `gke-gcloud-auth-plugin` installed
-  3. Run `terraform apply` specifying your admin password, domain, registry credentials, and GCP project / region:
+1. Run `terraform apply` with your variables:
 
-```
-$ terraform apply -var-file={TF_VARS_FILE}
-```
+    ```bash
+    terraform apply -var-file={TF_VARS_FILE}
+    ```
 
-  4. Update your DNS to point an A record to the `load balancer static IP` output value
+2. Update your DNS to point an A record to the `load_balancer_ip` output by Terraform.

@@ -7,12 +7,14 @@ locals {
   worker_name    = "${var.helm_release_name}-worker-srv"
   ui_name        = "${var.helm_release_name}-ui-srv"
   flower_name    = "${var.helm_release_name}-flower-srv"
+  scheduler_name = "${var.helm_release_name}-scheduler-srv"
 
   k8s_api_sa       = "${local.k8s_principal_sa_base}/${local.api_name}"
   k8s_migration_sa = "${local.k8s_principal_sa_base}/${local.migration_name}"
   k8s_worker_sa    = "${local.k8s_principal_sa_base}/${local.worker_name}"
   k8s_ui_sa        = "${local.k8s_principal_sa_base}/${local.ui_name}"
   k8s_flower_sa    = "${local.k8s_principal_sa_base}/${local.flower_name}"
+  k8s_scheduler_sa = "${local.k8s_principal_sa_base}/${local.scheduler_name}"
 }
 
 resource "google_project_service" "service_usage_api" {
@@ -55,8 +57,14 @@ resource "google_service_account" "flower_sa" {
   display_name = "${var.prefix}-${local.flower_name}"
 }
 
+resource "google_service_account" "scheduler_sa" {
+  account_id   = "${var.prefix}-${local.scheduler_name}"
+  display_name = "${var.prefix}-${local.scheduler_name}"
+}
+
 module "bucket_bindings" {
   source          = "terraform-google-modules/iam/google//modules/storage_buckets_iam"
+  version         = "~> 8.0"
   mode            = "authoritative"
   storage_buckets = [var.bucket_name]
 
@@ -70,7 +78,8 @@ module "bucket_bindings" {
 }
 
 module "k8s_to_gcp_api_binding" {
-  source = "terraform-google-modules/iam/google//modules/service_accounts_iam"
+  source  = "terraform-google-modules/iam/google//modules/service_accounts_iam"
+  version = "~> 8.0"
 
   project          = var.project
   mode             = "authoritative"
@@ -89,7 +98,8 @@ module "k8s_to_gcp_api_binding" {
 }
 
 module "k8s_to_gcp_migration_binding" {
-  source = "terraform-google-modules/iam/google//modules/service_accounts_iam"
+  source  = "terraform-google-modules/iam/google//modules/service_accounts_iam"
+  version = "~> 8.0"
 
   project          = var.project
   mode             = "authoritative"
@@ -102,7 +112,8 @@ module "k8s_to_gcp_migration_binding" {
 }
 
 module "k8s_to_gcp_worker_binding" {
-  source = "terraform-google-modules/iam/google//modules/service_accounts_iam"
+  source  = "terraform-google-modules/iam/google//modules/service_accounts_iam"
+  version = "~> 8.0"
 
   project          = var.project
   mode             = "authoritative"
@@ -115,7 +126,8 @@ module "k8s_to_gcp_worker_binding" {
 }
 
 module "k8s_to_gcp_ui_binding" {
-  source = "terraform-google-modules/iam/google//modules/service_accounts_iam"
+  source  = "terraform-google-modules/iam/google//modules/service_accounts_iam"
+  version = "~> 8.0"
 
   project          = var.project
   mode             = "authoritative"
@@ -128,8 +140,9 @@ module "k8s_to_gcp_ui_binding" {
 }
 
 module "k8s_to_gcp_flower_binding" {
-  count  = var.flower_enabled ? 1 : 0
-  source = "terraform-google-modules/iam/google//modules/service_accounts_iam"
+  count   = var.flower_enabled ? 1 : 0
+  source  = "terraform-google-modules/iam/google//modules/service_accounts_iam"
+  version = "~> 8.0"
 
   project          = var.project
   mode             = "authoritative"
@@ -138,5 +151,19 @@ module "k8s_to_gcp_flower_binding" {
   bindings = {
     # connects K8s SA to GCP SA
     "roles/iam.workloadIdentityUser" = [local.k8s_flower_sa]
+  }
+}
+
+module "k8s_to_gcp_scheduler_binding" {
+  source  = "terraform-google-modules/iam/google//modules/service_accounts_iam"
+  version = "~> 8.0"
+
+  project          = var.project
+  mode             = "authoritative"
+  service_accounts = [google_service_account.scheduler_sa.email]
+
+  bindings = {
+    # connects K8s SA to GCP SA
+    "roles/iam.workloadIdentityUser" = [local.k8s_scheduler_sa]
   }
 }

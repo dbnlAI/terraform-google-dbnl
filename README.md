@@ -54,7 +54,7 @@ Terraform modules to deploy dbnl in GCP
 | <a name="input_helm_release_name"></a> [helm\_release\_name](#input\_helm\_release\_name) | Helm Release name. | `string` | `"dbnl"` | no |
 | <a name="input_helm_release_namespace"></a> [helm\_release\_namespace](#input\_helm\_release\_namespace) | Namespace for helm release. | `string` | `"default"` | no |
 | <a name="input_helm_repository_password"></a> [helm\_repository\_password](#input\_helm\_repository\_password) | Password for accessing helm chart repository. If unset, defaults to `registry_password` | `string` | `null` | no |
-| <a name="input_helm_repository_url"></a> [helm\_repository\_url](#input\_helm\_repository\_url) | URL for accessing helm chart repository. | `string` | `"oci://ghcr.io/dbnlai/charts/dbnl"` | no |
+| <a name="input_helm_repository_url"></a> [helm\_repository\_url](#input\_helm\_repository\_url) | URL for accessing helm chart repository. | `string` | `"oci://ghcr.io/dbnlai/charts"` | no |
 | <a name="input_helm_repository_username"></a> [helm\_repository\_username](#input\_helm\_repository\_username) | Username for accessing helm chart repository. | `string` | `null` | no |
 | <a name="input_instance_size"></a> [instance\_size](#input\_instance\_size) | App instance size. | `string` | n/a | yes |
 | <a name="input_oidc_audience"></a> [oidc\_audience](#input\_oidc\_audience) | OIDC audience. Mutually exclusive with admin\_password. | `string` | `null` | no |
