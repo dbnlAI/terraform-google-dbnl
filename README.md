@@ -56,6 +56,7 @@ Terraform modules to deploy dbnl in GCP
 | <a name="input_helm_repository_password"></a> [helm\_repository\_password](#input\_helm\_repository\_password) | Password for accessing helm chart repository. If unset, defaults to `registry_password` | `string` | `null` | no |
 | <a name="input_helm_repository_url"></a> [helm\_repository\_url](#input\_helm\_repository\_url) | URL for accessing helm chart repository. | `string` | `"oci://ghcr.io/dbnlai/charts"` | no |
 | <a name="input_helm_repository_username"></a> [helm\_repository\_username](#input\_helm\_repository\_username) | Username for accessing helm chart repository. | `string` | `null` | no |
+| <a name="input_image_tag"></a> [image\_tag](#input\_image\_tag) | Container image tag override. Defaults to helm\_chart\_version when null. | `string` | `null` | no |
 | <a name="input_instance_size"></a> [instance\_size](#input\_instance\_size) | App instance size. | `string` | n/a | yes |
 | <a name="input_oidc_audience"></a> [oidc\_audience](#input\_oidc\_audience) | OIDC audience. Mutually exclusive with admin\_password. | `string` | `null` | no |
 | <a name="input_oidc_client_id"></a> [oidc\_client\_id](#input\_oidc\_client\_id) | OIDC client id. Mutually exclusive with admin\_password. | `string` | `null` | no |
