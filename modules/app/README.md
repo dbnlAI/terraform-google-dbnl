@@ -7,7 +7,7 @@ No requirements.
 
 | Name | Version |
 |------|---------|
-| <a name="provider_helm"></a> [helm](#provider\_helm) | n/a |
+| <a name="provider_helm"></a> [helm](#provider\_helm) | 2.13.2 |
 | <a name="provider_kubernetes"></a> [kubernetes](#provider\_kubernetes) | n/a |
 | <a name="provider_terraform"></a> [terraform](#provider\_terraform) | n/a |
 
@@ -48,6 +48,7 @@ No modules.
 | <a name="input_helm_repository_password"></a> [helm\_repository\_password](#input\_helm\_repository\_password) | Helm repository password. If unset, defaults to `registry_password`. | `string` | `null` | no |
 | <a name="input_helm_repository_url"></a> [helm\_repository\_url](#input\_helm\_repository\_url) | Helm repository url. | `string` | n/a | yes |
 | <a name="input_helm_repository_username"></a> [helm\_repository\_username](#input\_helm\_repository\_username) | Helm repository username. | `string` | n/a | yes |
+| <a name="input_image_tag"></a> [image\_tag](#input\_image\_tag) | Container image tag override. Defaults to helm\_chart\_version when null. | `string` | `null` | no |
 | <a name="input_ingress_cert_name"></a> [ingress\_cert\_name](#input\_ingress\_cert\_name) | GCP name of TLS/SSL cert for ingress. | `string` | n/a | yes |
 | <a name="input_oidc_audience"></a> [oidc\_audience](#input\_oidc\_audience) | OIDC audience. | `string` | `null` | no |
 | <a name="input_oidc_client_id"></a> [oidc\_client\_id](#input\_oidc\_client\_id) | OIDC client id. | `string` | `null` | no |

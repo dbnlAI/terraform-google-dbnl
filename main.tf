@@ -27,6 +27,7 @@ module "app" {
 
   # Helm chart info
   helm_chart_version       = var.helm_chart_version
+  image_tag                = var.image_tag
   helm_repository_url      = var.helm_repository_url
   helm_repository_username = local.helm_repository_username
   helm_repository_password = local.helm_repository_password

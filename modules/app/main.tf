@@ -6,6 +6,8 @@ locals {
 
   flower_basic_auth_enabled = nonsensitive(var.flower_basic_auth_username != null && var.flower_basic_auth_password != null)
 
+  image_tag = coalesce(var.image_tag, var.helm_chart_version)
+
   image_pull_secret = "${var.prefix}-docker-cfg"
 
   values = {
@@ -18,7 +20,7 @@ locals {
       baseUrl = "https://${var.domain}/api"
       image = {
         repository = "${var.registry_server}/images/api-srv"
-        tag        = var.helm_chart_version
+        tag        = local.image_tag
       }
       serviceAccount = {
         annotations = {
@@ -53,7 +55,7 @@ locals {
     migration = {
       image = {
         repository = "${var.registry_server}/images/migration-job"
-        tag        = var.helm_chart_version
+        tag        = local.image_tag
       }
       serviceAccount = {
         annotations = {
@@ -65,7 +67,7 @@ locals {
       enabled = true
       image = {
         repository = "${var.registry_server}/images/scheduler-srv"
-        tag        = var.helm_chart_version
+        tag        = local.image_tag
       }
       serviceAccount = {
         annotations = {
@@ -91,7 +93,7 @@ locals {
     worker = {
       image = {
         repository = "${var.registry_server}/images/worker-srv"
-        tag        = var.helm_chart_version
+        tag        = local.image_tag
       }
       realtime = {
         enabled = true
@@ -106,7 +108,7 @@ locals {
       baseUrl = "https://${var.domain}"
       image = {
         repository = "${var.registry_server}/images/ui-srv"
-        tag        = var.helm_chart_version
+        tag        = local.image_tag
       }
       serviceAccount = {
         annotations = {
@@ -118,7 +120,7 @@ locals {
       enabled = true
       image = {
         repository = "${var.registry_server}/images/flower-srv"
-        tag        = var.helm_chart_version
+        tag        = local.image_tag
       }
       serviceAccount = {
         annotations = {
@@ -133,7 +135,7 @@ locals {
       enabled = false
       image = {
         repository = "${var.registry_server}/images/flower-srv"
-        tag        = var.helm_chart_version
+        tag        = local.image_tag
       }
       serviceAccount = {
         annotations = {
