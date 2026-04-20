@@ -32,6 +32,7 @@ module "storage_object_access_role" {
   description  = "object upload/download permission for presigning URLs"
   permissions = [
     "storage.objects.get",
+    "storage.objects.list",
     "storage.objects.create",
     "storage.objects.delete",
   ]
