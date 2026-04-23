@@ -187,55 +187,22 @@ resource "helm_release" "dbnl" {
 
   values = [yamlencode(local.values)]
 
-  dynamic "set_sensitive" {
-    # for_each needs a list, but it's essentially a "count = ? 1 : 0"
-    for_each = local.admin_enabled ? ["admin-enabled"] : []
-    content {
-      name  = "auth.admin.hashedPassword"
-      value = bcrypt(var.admin_password)
-    }
-  }
-
-  set_sensitive {
-    name  = "auth.devToken.privateKey"
-    value = var.dev_token_private_key
-  }
-
-  set_sensitive {
-    name  = "redis.username"
-    value = var.redis_username
-  }
-
-  set_sensitive {
-    name  = "redis.password"
-    value = var.redis_password
-  }
-
-  set_sensitive {
-    name  = "db.username"
-    value = var.db_username
-  }
-
-  set_sensitive {
-    name  = "db.password"
-    value = var.db_password
-  }
-
-  dynamic "set_sensitive" {
-    for_each = local.flower_basic_auth_enabled ? ["flower-basic-auth-password"] : []
-    content {
-      name  = "flower.basicAuth.password"
-      value = var.flower_basic_auth_password
-    }
-  }
-
-  dynamic "set_sensitive" {
-    for_each = local.flower_basic_auth_enabled ? ["flower-basic-auth-username"] : []
-    content {
-      name  = "flower.basicAuth.username"
-      value = var.flower_basic_auth_username
-    }
-  }
+  set_sensitive = concat(
+    [
+      { name = "auth.devToken.privateKey", value = var.dev_token_private_key },
+      { name = "redis.username", value = var.redis_username },
+      { name = "redis.password", value = var.redis_password },
+      { name = "db.username", value = var.db_username },
+      { name = "db.password", value = var.db_password },
+    ],
+    local.admin_enabled ? [
+      { name = "auth.admin.hashedPassword", value = bcrypt(var.admin_password) },
+    ] : [],
+    local.flower_basic_auth_enabled ? [
+      { name = "flower.basicAuth.password", value = var.flower_basic_auth_password },
+      { name = "flower.basicAuth.username", value = var.flower_basic_auth_username },
+    ] : [],
+  )
 
   lifecycle {
     precondition {

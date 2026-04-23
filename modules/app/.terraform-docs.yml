@@ -1,0 +1,9 @@
+formatter: "markdown table"
+
+# This module’s `.terraform.lock.hcl` is typically gitignored when present; CI has
+# no lockfile. Nested READMEs are generated per-module; without `lockfile: false`
+# here, terraform-docs can still use a local lockfile for provider version cells
+# while CI emits constraints/`n/a` — pre-commit fails. Kept identical across
+# terraform-{aws,azurerm,google}-dbnl.
+settings:
+  lockfile: false
