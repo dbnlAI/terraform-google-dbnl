@@ -2,3 +2,9 @@ formatter: "markdown table"
 
 recursive:
   enabled: true
+
+# Root `.terraform.lock.hcl` is gitignored but often exists locally after `terraform
+# init`; without this, terraform-docs resolves exact provider versions from the
+# lockfile while CI (no lockfile) emits constraints — CI pre-commit then fails.
+settings:
+  lockfile: false

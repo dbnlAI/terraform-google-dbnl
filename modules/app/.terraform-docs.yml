@@ -1,0 +1,7 @@
+formatter: "markdown table"
+
+# Matches root repo: local `modules/app/.terraform.lock.hcl` is gitignored; CI has
+# no lockfile — without this, provider column shows resolved helm (e.g. 2.13.2)
+# locally and CI fails.
+settings:
+  lockfile: false
